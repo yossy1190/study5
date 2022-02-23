@@ -1,0 +1,49 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>POSシステム</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div>
+            <p>POSシステム</p>
+            <span>商品コード</span>
+            <input type="text" id="item_code" placeholder="001~999で入力">
+            <span>個数</span>
+            <!-- <select name="example" id="jojo">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+            </select> -->
+            <!-- 個数を1～99までプルダウン表示したい。記述を簡単にする方法はないか -->
+            <input type="text" id="item_amount">
+            <button onclick=put_cart() id="subtotal">カートに入れる</button>
+            <!-- 別途emptyerrorを記述する！ -->
+
+            <p>お買物終了時は、下の「買物終了ボタン」をクリックしてください
+            </p>
+            <button onclick="" id="alltotal">買物終了ボタン</button>
+            <span>預け入れ金額</span><input type="text" id="depo_money" placeholder="預け入れ金額を入力">
+            <button onclick="" id="conf_order">支払</button>
+        </div>
+        <div >
+            <p>お会計表示欄</p>
+            <textarea id="cal_result" display:block></textarea>
+        </div>
+        <script type="text/javascript" src="./eel.js">
+        </script>
+        <script>
+            
+            
+            //”商品コード”の値を読み取りsearch_codeに代入
+            //search_codeを引数として、python側から呼び出したadd_order_listを実行し、valに代入
+            //”お会計表示欄”に値を追加
+            async function put_cart(){
+                search_code=document.getElementById("item_code").value
+                let val= await eel. add_order_list(search_code)();
+                document.getElementById("cal_result").value+=val+"\n";
+            }
+            
+        </script>
+    </body>
+</html>
