@@ -34,13 +34,19 @@ for item_in in items_in:
 '''
 「カートに入れる」処理
 '''
+# orders=[]
+# for item_master in item_masters:
+#     orders.append(pos.Order(item_master))
+# ordersにはOrderクラスが１つずつ入っている状態
 
 order=pos.Order(item_masters)
 
 @eel.expose
 def add_order_list(item_code):
-    return order.add_order_list(item_code)
-# Orderクラス内のadd_order_listを呼び出し。
+  
+    item_infos= order.add_order_list(item_code)
+    return f"商品コード{item_infos[0]}、商品名{item_infos[1]}、商品価格{item_infos[2]}円をカートに入れました"
+
     
 
 desktop.start(app_name,end_point,size)
