@@ -8,23 +8,18 @@
         <div>
             <p>POSシステム</p>
             <span>商品コード</span>
-            <input type="text" id="item_code" placeholder="001~999で入力">
+            <input type="number" id="item_code" placeholder="1~99で入力">
             <span>個数</span>
-            <!-- <select name="example" id="jojo">
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-            </select> -->
-            <!-- 個数を1～99までプルダウン表示したい。記述を簡単にする方法はないか -->
-            <input type="text" id="item_amount">
+           
+            <input type="number" id="item_amount" min="1" step="1">
             <button onclick=put_cart() id="subtotal">カートに入れる</button>
             <!-- 別途emptyerrorを記述する！ -->
 
             <p>お買物終了時は、下の「買物終了ボタン」をクリックしてください
             </p>
-            <button onclick="" id="alltotal">買物終了ボタン</button>
-            <span>預け入れ金額</span><input type="text" id="depo_money" placeholder="預け入れ金額を入力">
-            <button onclick="" id="conf_order">支払</button>
+            <button onclick="fin_shop()" id="alltotal">買物終了ボタン</button>
+            <span>支払金額</span><input type="text" id="depo_money" placeholder="支払金額を入力">
+            <button onclick="pay_money()" id="conf_order">支払</button>
         </div>
         <div >
             <p>お会計表示欄</p>
@@ -40,7 +35,20 @@
             //”お会計表示欄”に値を追加
             async function put_cart(){
                 search_code=document.getElementById("item_code").value
-                let val= await eel. add_order_list(search_code)();
+                item_amount=document.getElementById("item_amount").value
+                let val= await eel. add_order_list(search_code,item_amount)();
+                document.getElementById("cal_result").value+=val+"\n";
+            }
+            
+            async function fin_shop(){
+                let val= await eel. fin_shop()();
+                document.getElementById("cal_result").value+=val+"\n";
+                
+            }
+            
+            async function pay_money(){
+                depo_money=document.getElementById("depo_money").value
+                let val= await eel. cul_shop(depo_money)();
                 document.getElementById("cal_result").value+=val+"\n";
             }
             
