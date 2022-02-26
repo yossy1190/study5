@@ -4,6 +4,7 @@
 '''
 import csv
 import datetime
+from imghdr import what
 from pathlib import Path
 import eel
 
@@ -24,35 +25,22 @@ class Order:
         self.item_masters=item_masters
         self.subtotal=0
         self.alltotal=0
-        self.pay_money=0
         self.change_money=0
         self.pay_money=0
         self.change_money=0
 
     def add_order_list(self,item_code):
-           
-        for item_master in self.item_masters:
-            if int(item_code) == int(item_master.item_code):
-                return item_master.item_code,item_master.item_name,item_master.price
-        
-            else:
-                return "Error"
-            
-    '''機能追加用メソッド
-    def print_order_item(self,val_item_code,amount):
-            # item_mastersから１つのitemを取り出し、item_code,item_name,priceにアクセスできるようにする。
-            # 入力されたitem_codeがitem_mastersに含まれているか確認。
-            
-            for item in self.item_masters:
+            for item_master in self.item_masters:
+                # print(item_master.item_code,item_code)
+                if int(item_code) == int(item_master.item_code):
+                    return item_master.item_code,item_master.item_name,item_master.price    
+            return None
                 
-                if val_item_code in item.item_code:
-                    
-                    self.subtotal = int(item.price)*int(amount)
-                    print(f"商品コード:{item.item_code},商品名:{item.item_name},価格:{int(item.price):,}円,個数{amount}個")
-            print(f"小計:{int(self.subtotal):,}円")
-    '''       
+                
+            
+    
     '''機能追加用メソッド  
-    def pay_total_money(self):
+    def fin_shop(self):
         
         self.pay_money=int(input(f"お会計は{int(self.alltotal):,}円です。預け入れ金額を入力してください(円不要)。>>>"))
         self.change_money=self.pay_money-int(self.alltotal)
