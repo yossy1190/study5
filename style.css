@@ -1,0 +1,17 @@
+#cal_result{
+    
+    width: 400px;
+    height: 600px;
+    
+}
+#cur_cart{
+    width: 200px;
+    height: 600px;
+}
+.check{
+    display: inline-block;
+}
+.cart{
+    display: inline-block;
+    padding-left: 350px;
+}
