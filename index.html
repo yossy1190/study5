@@ -8,7 +8,7 @@
         <div>
             <p>POSシステム</p>
             <span>商品コード</span>
-            <input type="number" id="item_code" placeholder="1~99で入力">
+            <input type="number" id="item_code" placeholder="1~99で入力" min="1" step="1">
             <span>個数</span>
            
             <input type="number" id="item_amount" min="1" step="1">
@@ -22,14 +22,26 @@
             <button onclick="pay_money()" id="conf_order">支払</button>
         </div>
         <div >
-            <p>お会計表示欄</p>
+            <p class="check">お会計表示欄</p>
+            <p class="cart">カート情報</p>
+            <br>
             <textarea id="cal_result" display:block></textarea>
+            <textarea id="cur_cart" cols="2" rows="3"></textarea>
         </div>
         <script type="text/javascript" src="./eel.js">
         </script>
         <script>
             
-            
+            eel.expose(cle_cur_cart)
+            function cle_cur_cart(){
+            document.getElementById("cur_cart").value="";
+            }
+
+            eel.expose(add_cur_cart)
+            function add_cur_cart(l_amount){                
+                document.getElementById("cur_cart").value+=l_amount+"\n";
+            }
+
             //”商品コード”の値を読み取りsearch_codeに代入
             //search_codeを引数として、python側から呼び出したadd_order_listを実行し、valに代入
             //”お会計表示欄”に値を追加
